@@ -1,0 +1,72 @@
+#import  libraries that will be used
+import tensorflow
+import keras
+from tensorflow.keras import layers and models 
+from keras.preprocessing.image import ImageDataGenerator
+import matplotlib for plotting
+
+#defining the directories training data directory 
+define validation directory as 'path_valifation_data' # path to validation data (taxiways, runways, and lanscapes)
+define train_directory as 'path_training_data' # path to directory (taxiways and runways)
+
+# create a training data generator
+create a variable named 'train_datagen'
+set 'train_datagen' to ImageDataGenerator with the following parameter:
+    set 'rescale' to __  # specify the rescaling value 
+
+# create a validation data generator
+create a variable named 'validation_datagen'
+set 'validation_datagen' to ImageDataGenerator with the following parameter:
+    set 'rescale' to __  # specify the rescaling value
+
+
+# making training data generator using flow_from_directory
+constructing a variable named 'train_generator'
+set 'train_generator' to the result of calling 'train_datagen.flow_from_directory' with the following parameters:
+    set 'directory' to 'train_directory' # the directory containing the images with subdirectories for each class
+    set 'target_size' to (x, y)       # resize images to x, y pixels (specifies dimensions images will be resized too)
+    set 'batch_size' to z         # number of images per batch
+    set 'class_mode' to 'binary'  # use binary class mode since we are using two classes oppossed to categorical
+
+# create validation data generator using flow_from_directory
+create a variable named 'validation_generator'
+set 'validation_generator' to the result of calling 'validation_datagen.flow_from_directory' with the following parameters:
+    set 'directory' to 'validation_directory'     
+    set 'target_size' to (x, y)                   
+    set 'batch_size' to z                         
+    set 'class_mode' to 'binary' 		**question**              
+
+
+# create a sequential model
+create a variable named 'model'
+set 'model' to a new instance of models.Sequential #for creating linear stack of the models
+
+# add convolutional and pooling layers
+add a conv2D layer to 'model'
+add a maxPooling2D layer to 'model'
+
+# flatten the output of the convolutional layers
+add a flatten layer to 'model'
+
+# add a dense layer
+add a dense layer to 'model'
+
+# add the output layer
+add a Dense layer to 'model'
+
+# compiling model with loss function, optimizer, and metrics
+compile 'model' with the following parameters:
+    set 'loss' to 'binary_crossentropy'  # loss function for binary classification, binary_crossentropy measures diff. b/w prediected possibilities and class labels (loss function used to see model preformance when training)
+    set 'optimizer' to 'rmsprop'         # optimizer, I've seen others use'adam,' rmsprop used to see model's weights updating during training, adjusts lesrning based on avg gradients
+    set 'metrics' to ['accuracy']        # metrics to monitor such as the performance, proportionate of correct predcitions based on the ones made
+
+# train  model using training and validation generators
+create a variable named 'history'
+set 'history' to the result of calling 'model.fit' with the following parameters: #for training model on training data based on parameters
+    set 'train_generator' as the training data generator
+    set 'steps_per_epoch' to the number of batches per epoch
+    set 'epochs' to the number of epochs to train
+    set 'validation_data' to 'validation_generator'
+    set 'validation_steps' to the number of batches for validation
+)
+
