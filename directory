@@ -1,0 +1,20 @@
+data/
+    training/
+        taxiway/
+            image1.jpg
+            image2.jpg
+            ...
+        runway/
+            image1.jpg
+            image2.jpg
+            ...
+    validation/
+        taxiway/
+            image1.jpg
+            image2.jpg
+            ...
+        runway/
+            image1.jpg
+            image2.jpg
+            ...
+        
