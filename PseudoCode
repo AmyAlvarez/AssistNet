@@ -1,72 +1,88 @@
-#import  libraries that will be used
-import tensorflow
-import keras
-from tensorflow.keras import layers and models 
-from keras.preprocessing.image import ImageDataGenerator
-import matplotlib for plotting
+#Raw Taxiway v Runway CNN
 
-#defining the directories training data directory 
-define validation directory as 'path_valifation_data' # path to validation data (taxiways, runways, and lanscapes)
-define train_directory as 'path_training_data' # path to directory (taxiways and runways)
+#import necessary libraries
+import tensorflow as tf 
+from tensorflow import keras
+from keras._tf_keras.keras.preprocessing.image import ImageDataGenerator
+from keras import layers, models
+import matplotlib.pyplot as plt
 
-# create a training data generator
-create a variable named 'train_datagen'
-set 'train_datagen' to ImageDataGenerator with the following parameter:
-    set 'rescale' to __  # specify the rescaling value 
+#defining the directories 
+train_directory = 'directory/training'
+validation_directory = 'directory/validation'
 
-# create a validation data generator
-create a variable named 'validation_datagen'
-set 'validation_datagen' to ImageDataGenerator with the following parameter:
-    set 'rescale' to __  # specify the rescaling value
+#creating image data generators
+training_data_generator =  ImageDataGenerator(rescale = 1./255)
+validation_data_generator = ImageDataGenerator(rescale = 1./255)
 
-
-# making training data generator using flow_from_directory
-constructing a variable named 'train_generator'
-set 'train_generator' to the result of calling 'train_datagen.flow_from_directory' with the following parameters:
-    set 'directory' to 'train_directory' # the directory containing the images with subdirectories for each class
-    set 'target_size' to (x, y)       # resize images to x, y pixels (specifies dimensions images will be resized too)
-    set 'batch_size' to z         # number of images per batch
-    set 'class_mode' to 'binary'  # use binary class mode since we are using two classes oppossed to categorical
-
-# create validation data generator using flow_from_directory
-create a variable named 'validation_generator'
-set 'validation_generator' to the result of calling 'validation_datagen.flow_from_directory' with the following parameters:
-    set 'directory' to 'validation_directory'     
-    set 'target_size' to (x, y)                   
-    set 'batch_size' to z                         
-    set 'class_mode' to 'binary' 		**question**              
-
-
-# create a sequential model
-create a variable named 'model'
-set 'model' to a new instance of models.Sequential #for creating linear stack of the models
-
-# add convolutional and pooling layers
-add a conv2D layer to 'model'
-add a maxPooling2D layer to 'model'
-
-# flatten the output of the convolutional layers
-add a flatten layer to 'model'
-
-# add a dense layer
-add a dense layer to 'model'
-
-# add the output layer
-add a Dense layer to 'model'
-
-# compiling model with loss function, optimizer, and metrics
-compile 'model' with the following parameters:
-    set 'loss' to 'binary_crossentropy'  # loss function for binary classification, binary_crossentropy measures diff. b/w prediected possibilities and class labels (loss function used to see model preformance when training)
-    set 'optimizer' to 'rmsprop'         # optimizer, I've seen others use'adam,' rmsprop used to see model's weights updating during training, adjusts lesrning based on avg gradients
-    set 'metrics' to ['accuracy']        # metrics to monitor such as the performance, proportionate of correct predcitions based on the ones made
-
-# train  model using training and validation generators
-create a variable named 'history'
-set 'history' to the result of calling 'model.fit' with the following parameters: #for training model on training data based on parameters
-    set 'train_generator' as the training data generator
-    set 'steps_per_epoch' to the number of batches per epoch
-    set 'epochs' to the number of epochs to train
-    set 'validation_data' to 'validation_generator'
-    set 'validation_steps' to the number of batches for validation
+#loading the images from the directories
+train_generator = training_data_generator.flow_from_directory(
+    train_directory,
+    target_size = (150, 150),
+    batch_size = 10,
+    class_mode = 'binary'
 )
+
+validation_generator = validation_data_generator.flow_from_directory(
+    validation_directory,
+    target_size = (150, 150),
+    batch_size = 10,
+    class_mode = 'binary'
+)
+
+#building the CNN model
+model = models.Sequential() #create a linear stack of layers
+model.add(layers.Conv2D(512, (3, 3), activation='relu', input_shape=(150, 150, 3))) #add convolutional layer
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(256 , (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Flatten()) #flatten output of layer to 1D array
+model.add(layers.Dense(32, activation='relu')) #add dense layer
+model.add(layers.Dense(1, activation='sigmoid')) #add output layer
+
+#compiling the model
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+#training the model
+history = model.fit(
+    train_generator,
+    steps_per_epoch=10, #number of batches to yield from generator before declaring one epoch finished
+    epochs=10,
+    validation_data=validation_generator,
+    validation_steps=13
+)
+
+#plotting the training and validation accuracy and loss
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+
+epochs_range = range(10)
+
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.plot(epochs_range, acc, label='Training Accuracy')
+plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+plt.legend(loc='lower right')
+plt.title('Training and Validation Accuracy')
+
+plt.subplot(1, 2, 2)
+plt.plot(epochs_range, loss, label='Training Loss')
+plt.plot(epochs_range, val_loss, label='Validation Loss')
+plt.legend(loc='upper right')
+plt.title('Training and Validation Loss')
+plt.show()
+
+# Save the model to directory
+model.save('C:/Users/amyba/OneDrive/Desktop/llm/directory/taxiway_runway_classifier.h5')
+
+
+
 
