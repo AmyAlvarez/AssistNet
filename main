@@ -1,4 +1,4 @@
-#Raw Taxiway v Runway CNN
+#Taxiway v Runway CNN
 
 #import necessary libraries
 import tensorflow as tf 
@@ -19,29 +19,29 @@ validation_data_generator = ImageDataGenerator(rescale = 1./255)
 train_generator = training_data_generator.flow_from_directory(
     train_directory,
     target_size = (150, 150),
-    batch_size = 20,
+    batch_size = 10,
     class_mode = 'binary'
 )
 
 validation_generator = validation_data_generator.flow_from_directory(
     validation_directory,
     target_size = (150, 150),
-    batch_size = 20,
+    batch_size = 10,
     class_mode = 'binary'
 )
 
 #building the CNN model
 model = models.Sequential() #create a linear stack of layers
-model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(150, 150, 3))) #add convolutional layer
+model.add(layers.Conv2D(512, (3, 3), activation='relu', input_shape=(150, 150, 3))) #add convolutional layer
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(256 , (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(128, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(64, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Flatten()) #flatten output of layer to 1D array
-model.add(layers.Dense(512, activation='relu')) #add dense layer
+model.add(layers.Dense(32, activation='relu')) #add dense layer
 model.add(layers.Dense(1, activation='sigmoid')) #add output layer
 
 #compiling the model
@@ -52,10 +52,10 @@ model.compile(loss='binary_crossentropy',
 #training the model
 history = model.fit(
     train_generator,
-    steps_per_epoch=100, #number of batches to yield from generator before declaring one epoch finished
-    epochs=20,
+    steps_per_epoch=10, #number of batches to yield from generator before declaring one epoch finished
+    epochs=10,
     validation_data=validation_generator,
-    validation_steps=50
+    validation_steps=13
 )
 
 #plotting the training and validation accuracy and loss
@@ -64,7 +64,7 @@ val_acc = history.history['val_accuracy']
 loss = history.history['loss']
 val_loss = history.history['val_loss']
 
-epochs_range = range(20)
+epochs_range = range(10)
 
 plt.figure(figsize=(8, 8))
 plt.subplot(1, 2, 1)
@@ -81,7 +81,6 @@ plt.title('Training and Validation Loss')
 plt.show()
 
 # Save the model to directory
-model.save('C:/Users/amyba/OneDrive/Desktop/llm/directory/taxiway_runway_classifier.h5')
-
+model.save('C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/taxiway_runway_classifier.h5')
 
 
