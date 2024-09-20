@@ -17,4 +17,13 @@ data/
             image1.jpg
             image2.jpg
             ...
-        
+    testing/
+        taxiway/
+            image1.jpg
+            image2.jpg
+            ...
+        runway/
+            image1.jpg
+            image2.jpg
+            ...
+
