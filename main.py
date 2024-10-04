@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt #visualization
 import pandas as pd
 import os
 
-# define the directories for the datasets
-final_train_directory = '/directory/training'
-final_validation_directory = '/directory/validation'
+# define the directories for the final datasets
+final_train_directory = 'path/directory/final_training'
+final_validation_directory = 'path/directory/final_validation'
 
 # image data generators for rescaling the pixel values
 training_data_generator = ImageDataGenerator(rescale=1./255)  # rescale pixel values to [0, 1]
@@ -83,4 +83,4 @@ plt.title('Training and Validation Loss')
 plt.show()
 
 # Save the model to the directory
-model.save('/directory/taxiway_runway_classifier.h5')
+model.save('path/directory/taxiway_runway_classifier.h5')
