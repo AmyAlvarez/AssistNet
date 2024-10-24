@@ -8,6 +8,10 @@ from keras import layers, models
 import matplotlib.pyplot as plt #visualization
 import pandas as pd
 import os
+from gpu_setup import setup_gpu
+
+# Initialize the GPU (or default to CPU if no GPU is found)
+setup_gpu()
 
 # define the directories for the final datasets
 final_train_directory = 'path/directory/final_training'
@@ -59,6 +63,8 @@ history = model.fit(
     validation_data=validation_generator,
     validation_steps=len(validation_generator)  # Use len(generator) for validation steps
 )
+
+print("Model is ready to be trained.")
 
 # Plotting the training and validation accuracy and loss
 acc = history.history['accuracy']
