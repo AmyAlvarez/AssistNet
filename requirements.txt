@@ -1,0 +1,10 @@
+tensorflow==2.9.1      # TensorFlow for building the CNN model
+numpy==1.21.6          # Operations
+pandas==1.3.5          # Data handling and manipulation
+opencv-python==4.5.5.64 # Video and image processing
+scikit-learn==1.0.2    # Dataset splitting and evaluation metrics
+matplotlib==3.4.3      # Plotting the results
+seaborn==0.11.2        # Data visualization (optional)
+tqdm==4.62.3           # Progress bars for training loops
+argparse==1.4.0        # Command-line argument parsing
+python-dotenv==0.19.2  # Environment variable management
