@@ -1,4 +1,4 @@
-# AssistTaxi | CNN for Aircraft Runway and Taxiway Classification
+# AssistTaxi
 Assist Taxi is a Computer Vision-based tool designed to assist aircraft navigation by classifying taxiways and runways using Convolutional Neural Networks (CNNs). 
 
 ![Python](https://img.shields.io/badge/Python-3.7.17-blue)
