@@ -10,6 +10,5 @@ Assist Taxi is a Computer Vision-based tool designed to assist aircraft navigati
 05. [Model Architecture](#model-architecture)
 06. [Results](#results)
 07. [Future Work](#future-work)
-08. [Contributing](#contributing)
-09. [License](#license)
-10. [Contact](#contact)
+08. [License](#license)
+09. [Contact](#contact)
