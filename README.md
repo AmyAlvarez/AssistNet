@@ -42,11 +42,6 @@ Assist Taxi is a Computer Vision-based tool designed to assist aircraft navigati
 
 - **Accuracy**: 
 - **Loss**: 
-- **Confusion Matrix**:
-  - True Positive:
-  - True Negative:
-  - False Positive:
-  - False Negative:
 
 ## Future Work
 - Implement real-time classification using video input.
