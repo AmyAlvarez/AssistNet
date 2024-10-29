@@ -3,10 +3,17 @@ from sklearn.model_selection import train_test_split
 import shutil
 
 # Path for the original dataset (where all images are stored)
+<<<<<<< HEAD
 original_data_dir = 'path/directory/original_data_dir' # where all data is kept
 train_dir = 'path/directory/final_training'
 val_dir = 'path/directory/final_validation'
 test_dir = 'path/directory/final_testing'
+=======
+original_data_dir = 'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY2/directory/original_data_dir' #where all data is kept
+train_dir = 'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY2/directory/final_training'
+val_dir = 'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY2/directory/final_validation'
+test_dir = 'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY2/directory/final_testing'
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
 
 # ensure directories for train, validation, and test are created
 os.makedirs(train_dir, exist_ok=True)

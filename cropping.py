@@ -17,12 +17,17 @@ def remove_black_borders(image):
     else:
         return image  # If no non-black area is detected, return the original image
 
+<<<<<<< HEAD
 # function to crop or resize an image to 400x224 aspect ratio and remove black borders
+=======
+# Function to crop or resize an image to 400x224 aspect ratio and remove black borders
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
 def crop_image(image_path, output_path):
     print(f"Processing image: {image_path}")
     image = cv2.imread(image_path)
     h, w, _ = image.shape
 
+<<<<<<< HEAD
     # remove black borders if they exist
     cropped_image = remove_black_borders(image)
 
@@ -33,26 +38,54 @@ def crop_image(image_path, output_path):
     crop_w, crop_h = 400, 225
 
     # check if the image has black borders and adjust the crop size accordingly
+=======
+    # Remove black borders if they exist
+    cropped_image = remove_black_borders(image)
+
+    # Get new dimensions after removing black borders
+    h, w, _ = cropped_image.shape
+
+    # Desired crop dimensions (maintain 16:9 aspect ratio)
+    crop_w, crop_h = 400, 225
+
+    # Check if the image has black borders and adjust the crop size accordingly
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
     if np.array_equal(cropped_image, image) == False:
         print(f"Black borders detected, applying 400x224 crop for: {image_path}")
 
     if w >= crop_w and h >= crop_h:
+<<<<<<< HEAD
         # center cropping: Centered both horizontally and vertically for 16:9 aspect ratio
+=======
+        # Center cropping: Centered both horizontally and vertically for 16:9 aspect ratio
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
         x_start = (w - crop_w) // 2
         y_start = (h - crop_h) // 2
         final_cropped_image = cropped_image[y_start:y_start + crop_h, x_start:x_start + crop_w]
     else:
+<<<<<<< HEAD
         # resize if the image is smaller than the desired crop size
         print(f"Image {image_path} is too small, resizing instead of cropping.")
         final_cropped_image = cv2.resize(cropped_image, (crop_w, crop_h))
 
     # save the cropped or resized image
+=======
+        # Resize if the image is smaller than the desired crop size
+        print(f"Image {image_path} is too small, resizing instead of cropping.")
+        final_cropped_image = cv2.resize(cropped_image, (crop_w, crop_h))
+
+    # Save the cropped or resized image
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
     if not os.path.exists(os.path.dirname(output_path)):
         os.makedirs(os.path.dirname(output_path))
     cv2.imwrite(output_path, final_cropped_image)
     print(f"Saved cropped image: {output_path}")
 
+<<<<<<< HEAD
 # function to apply cropping to an entire dataset
+=======
+# Function to apply cropping to an entire dataset
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
 def apply_cropping_to_dataset(input_directory, output_directory):
     print(f"Processing dataset from {input_directory} to {output_directory}")
     for root, dirs, files in os.walk(input_directory):
@@ -63,8 +96,16 @@ def apply_cropping_to_dataset(input_directory, output_directory):
                 crop_image(input_path, output_path)
 
 # Apply cropping to your dataset paths
+<<<<<<< HEAD
 apply_cropping_to_dataset('/directory/training',
                           '/directory/training_cropped')
 
 apply_cropping_to_dataset('/directory/validation',
                           '/directory/validation_cropped')
+=======
+apply_cropping_to_dataset('C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/training',
+                          'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/training_cropped')
+
+apply_cropping_to_dataset('C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/validation',
+                          'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/validation_cropped')
+>>>>>>> a6e810ba8f22629ac3c6a06d89164f9d67b514d7
