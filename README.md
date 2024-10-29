@@ -15,7 +15,6 @@ Assist Taxi is a Computer Vision-based tool designed to assist aircraft navigati
 08. [License](#license)
 09. [Contact](#contact)
 
-
 ## Features
 - Classifies taxiways and runways with high accuracy.
 - Supports Piper aircraft images.
