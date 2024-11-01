@@ -38,6 +38,23 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
    ```bash
    python -c "import tensorflow; print(tensorflow.__version__)"
 
+## Usage
+### 1. Data Preparation
+   - Ensure you have prepared your dataset according to the structure below:
+     ```
+     C:/Users/your_username/AssistNet/dataset/
+     ├── training/
+     │   ├── taxiway/
+     │   └── runway/
+     ├── validation/
+     │   ├── taxiway/
+     │   └── runway/
+     ├── testing/
+     │   ├── taxiway/
+     │   └── runway/
+     ```
+   - Place the **taxiway** and **runway** images in their respective folders under training, validation, and testing.
+
 ## Results
 <img src="https://github.com/user-attachments/assets/a4baeb40-69e3-46e6-abca-6ce7f1feb2d5" width="700" height="700" alt="Confusion Matrix Sample 1">
 <img src="https://github.com/user-attachments/assets/724c10e4-51ed-4000-aad4-367dcad77821" width="700" height="700" alt="Confusion Matrix Sample 2">
