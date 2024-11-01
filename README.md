@@ -42,7 +42,7 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
 ### 1. Data Preparation
    - Ensure you have prepared your dataset according to the structure below:
      ```
-     C:/Users/your_username/AssistNet/dataset/
+     C:/Users/your_username/AssistNet/directory/
      ├── training/
      │   ├── taxiway/
      │   └── runway/
@@ -54,6 +54,15 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
      │   └── runway/
      ```
    - Place the **taxiway** and **runway** images in their respective folders under training, validation, and testing.
+### 2. Training the Model
+   - Run the following command to train the model:
+### 3. Evaluating the Model
+   - Once training is complete, evaluate the model on the test set:
+     ```bash
+     python evaluate.py --data_path C:/Users/your_username/AssistNet/directory/testing/
+     ```
+   - This will generate a confusion matrix and additional evaluation metrics like accuracy and precision saved to your output directory.
+
 
 ## Results
 <img src="https://github.com/user-attachments/assets/a4baeb40-69e3-46e6-abca-6ce7f1feb2d5" width="700" height="700" alt="Confusion Matrix Sample 1">
