@@ -71,7 +71,7 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
 ### Training Metrics
 Below are the training and validation metrics tracked during the model's training process:
 
-<img src="https://github.com/user-attachments/assets/3bb3c8bd-1a24-4bf1-9f9a-48090435825e" width="500" height="300" alt="Confusion Matrix Sample 1">
+<img src="https://github.com/user-attachments/assets/40cacc6a-9f02-40c4-8104-6a27e4fe6087" width="700" height="700"> 
 
 - **Accuracy**: Consistent improvement was observed as the epochs progressed, indicating effective learning.
 - **Loss**: The model's loss steadily decreased, confirming convergence and reduced error in predictions.
