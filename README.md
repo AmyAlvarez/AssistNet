@@ -62,11 +62,12 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
      python evaluate.py --data_path C:/Users/your_username/AssistNet/directory/testing/
      ```
    - This will generate a confusion matrix and additional evaluation metrics like accuracy and precision saved to your output directory.
-
+   - 
+## Model Architecture
+<img src="https://github.com/user-attachments/assets/007296c3-4712-4297-8d06-e8af831dcc19" width="600" height="300" alt="Confusion Matrix Sample 2">
 
 ## Results
-<img src="https://github.com/user-attachments/assets/a4baeb40-69e3-46e6-abca-6ce7f1feb2d5" width="700" height="700" alt="Confusion Matrix Sample 1">
-<img src="https://github.com/user-attachments/assets/724c10e4-51ed-4000-aad4-367dcad77821" width="700" height="700" alt="Confusion Matrix Sample 2">
+<img src="https://github.com/user-attachments/assets/588e6ddd-8817-4ec6-b1b0-c1a931acd86c" width="700" height="700" alt="Confusion Matrix Sample 2">
 
 ### Training Metrics
 Below are the training and validation metrics tracked during the model's training process:
