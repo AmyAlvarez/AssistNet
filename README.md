@@ -8,12 +8,11 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
 01. [Features](#features)
 02. [Installation](#installation)
 03. [Usage](#usage)
-04. [Dataset Preparation](#dataset-preparation)
-05. [Model Architecture](#model-architecture)
-06. [Results](#results)
-07. [Future Work](#future-work)
-08. [License](#license)
-09. [Contact](#contact)
+04. [Model Architecture](#model-architecture)
+05. [Results](#results)
+06. [Future Work](#future-work)
+07. [License](#license)
+08. [Contact](#contact)
 
 ## Features
 - Classifies taxiways and runways with high accuracy.
@@ -38,9 +37,10 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
    ```bash
    python -c "import tensorflow; print(tensorflow.__version__)"
 
+
 ## Usage
 ### 1. Data Preparation
-   - Ensure you have prepared your dataset according to the structure below:
+   - Organize your dataset as follows to separate training, validation, and testing data. Each folder should contain subfolders for taxiway and runway images:
      ```
      C:/Users/your_username/AssistNet/directory/
      ├── training/
@@ -54,17 +54,40 @@ AssistNet is a Computer Vision-based tool designed to assist aircraft navigation
      │   └── runway/
      ```
    - Place the **taxiway** and **runway** images in their respective folders under training, validation, and testing.
-### 2. Training the Model
+   - Each subfolder should contain images labeled according to the category they represent (e.g., t_00001.jpg for taxiways and r_00001.jpg for runways).
+#### Video Frame Splicing (Optional)
+To enhance your dataset, you can extract frames from video recordings of taxiways and runways. This is particularly useful for capturing various perspectives and lighting conditions. Here’s how to prepare frames from video files:
+
+**Video Splicing:** Use a tool or script to split video files into individual frames.
+Extract frames at regular intervals (e.g., every 5th or 10th frame) to avoid redundant images.
+Save each frame in the appropriate folder (taxiway or runway) depending on the video content.
+
+**Image Cropping:** If your images contain extraneous elements or backgrounds, consider cropping them to focus on the runway or taxiway sections. This can improve classification accuracy.
+
+**Resolution and Resizing:** Standardize the resolution of your images to match the input size expected by the model (e.g., 224x224 or 404x225). Consistent image dimensions improve the model’s performance and reduce computational complexity.
+
+### 2. Balancing the Dataset
+Ensure that both classes (taxiway and runway) are balanced within each dataset split (training, validation, testing). An imbalanced dataset can lead to biased model performance, where the model favors the class with more examples. If you encounter an imbalance:
+
+Use oversampling or data augmentation on the minority class to create a balanced dataset.
+Adjust training strategies if imbalances are unavoidable.
+
+###  Training the Model
    - Run the following command to train the model:
-### 3. Evaluating the Model
+###  Evaluating the Model
    - Once training is complete, evaluate the model on the test set:
      ```bash
      python evaluate.py --data_path C:/Users/your_username/AssistNet/directory/testing/
      ```
    - This will generate a confusion matrix and additional evaluation metrics like accuracy and precision saved to your output directory.
-   - 
+
+
+
+
 ## Model Architecture
 <img src="https://github.com/user-attachments/assets/007296c3-4712-4297-8d06-e8af831dcc19" width="600" height="300" alt="Confusion Matrix Sample 2">
+
+AssistNet employs a CNN architecture designed for high accuracy in image classification tasks. Key features include convolutional, pooling, and fully connected layers optimized for distinguishing between taxiway and runway images.
 
 ## Results
 <img src="https://github.com/user-attachments/assets/588e6ddd-8817-4ec6-b1b0-c1a931acd86c" width="700" height="700" alt="Confusion Matrix Sample 2">
