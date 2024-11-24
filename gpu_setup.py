@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-<<<<<<< HEAD
+
 def setup_gpu():
     # check if GPU is available and set it up
     gpus = tf.config.list_physical_devices('GPU')
