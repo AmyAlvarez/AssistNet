@@ -6,16 +6,16 @@ import numpy as np
 import itertools
 from sklearn.metrics import confusion_matrix
 
-# Define the test data directory
-test_directory = '/app/directory/final_testing'
+# defining the test data directory
+test_directory = 'directory/final_testing'
 
-# Load the trained model
-model = tf.keras.models.load_model('/app/directory/taxiway_v_runway_model.h5')
+# loads the trained model
+model = tf.keras.models.load_model('directory/taxiway_v_runway_model.h5')
 
 # Create an ImageDataGenerator for test data (rescale pixel values)
 test_data_generator = ImageDataGenerator(rescale=1.0 / 255)
 
-# Load the test data using flow_from_directory
+# loads the test data using flow_from_directory
 test_generator = test_data_generator.flow_from_directory(
     test_directory,
     target_size=(150, 150),
@@ -36,10 +36,9 @@ predicted_classes = np.round(predictions).astype(int)
 class_indices = test_generator.class_indices
 class_labels = {v: k for k, v in class_indices.items()}  # Invert the dictionary
 
-# Extract ground truth labels from the generator
 true_classes = test_generator.classes
 
-# Plot confusion matrix
+# plots confusion matrix (optional)
 def plot_confusion_matrix(cm, classes, title='Confusion Matrix', cmap=plt.cm.Blues):
     plt.figure(figsize=(6, 6))
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
@@ -60,11 +59,11 @@ def plot_confusion_matrix(cm, classes, title='Confusion Matrix', cmap=plt.cm.Blu
     plt.ylabel('True Label')
     plt.xlabel('Predicted Label')
 
-# Compute confusion matrix
+# computing confusion matrix
 cm = confusion_matrix(true_classes, predicted_classes)
 plot_confusion_matrix(cm, list(class_labels.values()))
 
-# Show some example predictions with images
+# outputs images with models predictions and labels
 plt.figure(figsize=(12, 12))
 for i in range(9):  # Display 9 sample predictions
     plt.subplot(3, 3, i + 1)
@@ -76,7 +75,7 @@ for i in range(9):  # Display 9 sample predictions
     true_label = class_labels[true_classes[i]]
     plt.title(f"Pred: {predicted_label}\nTrue: {true_label}")
 
-plt.savefig('/app/directory/confusion_matrix.png')
-print("Confusion matrix saved to /app/directory/confusion_matrix.png")
+plt.savefig('/directory/confusion_matrix.png')
+print("Confusion matrix saved to /directory/confusion_matrix.png")
 
 plt.show()
