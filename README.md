@@ -111,6 +111,5 @@ Below are the training and validation metrics tracked during the model's trainin
 For questions, suggestions, or collaborations:
 - **Amy Alvarez** - alvareza2023@my.fit.edu
 - **Parth Ganeriwala** - pganeriwala2022@my.fit.edu
-- [GitHub Profile](https://github.com/your-username)
 
 
