@@ -70,8 +70,8 @@ apply_cropping_to_dataset('/directory/training',
 apply_cropping_to_dataset('/directory/validation',
                           '/directory/validation_cropped')
 =======
-apply_cropping_to_dataset('C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/training',
-                          'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/training_cropped')
+apply_cropping_to_dataset('/directory/training',
+                          '/directory/training_cropped')
 
-apply_cropping_to_dataset('C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/validation',
-                          'C:/Users/amyba/OneDrive/Desktop/ML_CLASSIFY/directory/validation_cropped')
+apply_cropping_to_dataset('/directory/validation',
+                          '/directory/validation_cropped')
