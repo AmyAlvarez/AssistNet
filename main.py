@@ -1,4 +1,3 @@
-#import necessary libraries
 import tensorflow as tf 
 from tensorflow import keras 
 from keras._tf_keras.keras.preprocessing.image import ImageDataGenerator
@@ -10,10 +9,6 @@ from gpu_setup import setup_gpu
 
 # initialize the GPU for training (or default to CPU if no GPU is found)
 setup_gpu()
-
-# define the directories for the final datasets
-final_train_directory = 'path/directory/final_training'
-final_validation_directory = 'path/directory/final_validation'
 
 from keras._tf_keras.keras import backend as K
 
@@ -30,7 +25,6 @@ train_generator = training_data_generator.flow_from_directory(
     final_train_directory,
     target_size=(150, 150),  # resizing images to 150x150
     batch_size=64,
-    batch_size=4,
     class_mode='binary'  # binary classification (taxiway vs runway)
 )
 
@@ -38,7 +32,6 @@ validation_generator = validation_data_generator.flow_from_directory(
     final_validation_directory,
     target_size=(150, 150),  # resizing images to 150x150
     batch_size=64,
-    batch_size=4,
     class_mode='binary'  # binary classification
 )
 
@@ -64,24 +57,11 @@ model.compile(loss='binary_crossentropy',
 # training the model
 history = model.fit(
     train_generator,
-    steps_per_epoch=len(train_generator),  # Use len(generator) for correct number of steps
+    steps_per_epoch=len(train_generator),  
     epochs=15,
     validation_data=validation_generator,
-    validation_steps=len(validation_generator)  # Use len(generator) for validation steps
+    validation_steps=len(validation_generator)
 )
-
-print("Model is ready to be trained.")
-=======
-# Train the model
-history = model.fit(
-    train_generator,
-    steps_per_epoch=train_generator.samples // train_generator.batch_size,
-    validation_data=validation_generator,
-    validation_steps=validation_generator.samples // validation_generator.batch_size,
-    epochs=4  # Adjust epochs for testing
-)
-
-print("Model ready to be trained.")
 
 # Plotting the training and validation accuracy and loss
 acc = history.history['accuracy']
@@ -91,7 +71,6 @@ val_loss = history.history['val_loss']
 
 epochs_range = range(len(acc))
 
-plt.figure(figsize=(8, 8))
 plt.figure(figsize=(12, 6))
 
 # plotting accuracy
@@ -109,15 +88,14 @@ plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
 
-# Save the model to the directory
-model.save('path/directory/taxiway_runway_classifier.h5')
 plot_path = '/app/directory/training_plot.png'
 plt.savefig(plot_path)
 plt.show()
 
 print(f"Training plot saved at: '/directory/path")
+print(f"Training plot saved as: {plot_path}")
 
-# Save the model to the directory
-model.save('/directory/taxiway_v_runway_model.h5') #container directory
+# save the model
+model.save('/directory/taxiway_v_runway_model.h5')
 
 
