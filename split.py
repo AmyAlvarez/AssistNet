@@ -8,12 +8,6 @@ train_dir = 'path/directory/final_training'
 val_dir = 'path/directory/final_validation'
 test_dir = 'path/directory/final_testing'
 
-original_data_dir = '/directory/original_data_dir' 
-train_dir = 'path/directory/final_training'
-val_dir = 'path/directory/final_validation'
-test_dir = 'path/directory/final_testing'
-
-
 # ensure directories for train, validation, and test are created
 os.makedirs(train_dir, exist_ok=True)
 os.makedirs(val_dir, exist_ok=True)
@@ -33,17 +27,9 @@ def split_data():
     train_taxiway, temp_taxiway = train_test_split(taxiway_images, test_size=0.3, random_state=42)
     val_taxiway, test_taxiway = train_test_split(temp_taxiway, test_size=0.333, random_state=42)
 
-    # split runway images: 70% train, 20% validation, 10% test
-    train_runway, temp_runway = train_test_split(runway_images, test_size=0.3, random_state=42)
-    val_runway, test_runway = train_test_split(temp_runway, test_size=0.333, random_state=42)
-
-
     copy_files(train_taxiway, original_data_dir, os.path.join(train_dir, 'taxiway'))
     copy_files(val_taxiway, original_data_dir, os.path.join(val_dir, 'taxiway'))
     copy_files(test_taxiway, original_data_dir, os.path.join(test_dir, 'taxiway'))
     
-    copy_files(train_runway, original_data_dir, os.path.join(train_dir, 'runway'))
-    copy_files(val_runway, original_data_dir, os.path.join(val_dir, 'runway'))
-    copy_files(test_runway, original_data_dir, os.path.join(test_dir, 'runway'))
 
 split_data()
