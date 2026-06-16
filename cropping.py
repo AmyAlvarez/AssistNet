@@ -69,9 +69,3 @@ apply_cropping_to_dataset('/directory/training',
 
 apply_cropping_to_dataset('/directory/validation',
                           '/directory/validation_cropped')
-=======
-apply_cropping_to_dataset('/directory/training',
-                          '/directory/training_cropped')
-
-apply_cropping_to_dataset('/directory/validation',
-                          '/directory/validation_cropped')
